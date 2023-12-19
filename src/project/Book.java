@@ -2,7 +2,7 @@ package project;
 
 public class Book {
   private String bookId;
-  private String BookName;
+  private String bookName;
   private int bookPrice;
   private String bookAuthor;
   private String bookSubName;
@@ -11,7 +11,7 @@ public class Book {
 
   public Book(String bookId, String bookName, int bookPrice, String bookAuthor, String bookSubName, String bookCategory, String bookDate) {
     this.bookId = bookId;
-    BookName = bookName;
+    this.bookName = bookName;
     this.bookPrice = bookPrice;
     this.bookAuthor = bookAuthor;
     this.bookSubName = bookSubName;
@@ -20,7 +20,7 @@ public class Book {
   }
 
   public void bookPrint (){
-    System.out.print(bookId+" | "+BookName+" | "+bookPrice+" | "+bookAuthor+" | "+bookSubName+" | "+bookCategory+" | "+bookDate+" | \n");
+    System.out.print(bookId+" | "+bookName+" | "+bookPrice+" | "+bookAuthor+" | "+bookSubName+" | "+bookCategory+" | "+bookDate+" | \n");
   }
 
   public String getBookId() {

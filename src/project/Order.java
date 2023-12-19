@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Order {
-  public static void main(String[] args) {
+  static String adName = "홍길동";
+  static String adPhone = "1234";
 
+  public void run() {
     Scanner sc = new Scanner(System.in);
     String name;
     String tel;
+
+    int choiceNum; // 메뉴 선택번호
+
     ArrayList<Book> bookMall = new ArrayList<>(); // 이 쇼핑몰 책리스트
-    int choice; // 메뉴 선택번호
-    String inputId = ""; // 입력받는 책아이디
-    String inputTF;   // 장바구니 추가하겠습니까? Y|N
 
     Book book1 = new Book("ISBN1234", "쉽게 배우는 JSP 웹 프로그래밍", 27000, "송미영", "단계별로 쇼핑몰을 구현하며 배우는 JSP 웹 프로그래밍", "IT전문서", "2018/10/06");
     Book book2 = new Book("ISBN1235", "안드로이드 프로그래밍", 33000, "우재남", "실습 단계별 명쾌한 멘토링!", "IT전문서", "2022/01/22");
@@ -22,84 +24,48 @@ public class Order {
     bookMall.add(book2);
     bookMall.add(book3);
 
+    User cus1 = null;
+    Admin admin = null;
 
     System.out.print("당신의 이름을 입력하세요 : ");
     name = sc.nextLine();
     System.out.print("연락처를 입력하세요 : ");
     tel = sc.nextLine();
+    if (adName.equals(name) && adPhone.equals(tel)) {
+      admin = new Admin(adName, adPhone, "Admin", "Admin1234");
 
-    Customer cus1 = new Customer(name, tel); // 고객생성
-    System.out.println("******************************");
+    } else {
+      cus1 = new User(name, tel); // 고객생성
+    }
+
+    OrderService orderService = new OrderService(cus1);
+
+    System.out.println("******************************\n");
     System.out.println("\tWelcom to Shopping Mall");
     System.out.println("\tWelcom to Book Market");
 
     while (true) {
-      System.out.println();
-      System.out.println("******************************");
-      System.out.println("1. 고객 정보 확인하기");
-      System.out.println("2. 장바구니 상품 목록보기");
-      System.out.println("4. 바구니에 항목 추가하기");
-      System.out.println("8. 종료");
-      System.out.println("******************************");
-      System.out.print("\n메뉴 번호를 선택해주세요 ");
-      choice = sc.nextInt();
+      orderService.printMenu();
+
+      choiceNum = sc.nextInt();
       sc.nextLine();
 
-      switch (choice) {
+      switch (choiceNum) {
         case 1 -> {
-          System.out.println("고객 정보확인");
-          cus1.printCustomerInform(); // 고객 이름, 전화번호 출력
+          orderService.serviceCustomerPrint();
         }
         case 2 -> {
-          System.out.println("장바구니 상품목록 보기");
-          if (!cus1.getBookCart().isEmpty()) { // 장바구니가 비어있지 않으면 장바구니 리시트 출력
-            cus1.printCartList();
-          }
-          else {
-            System.out.println("장바구니 비었습니다.");
-          }
+          orderService.servicePrintCartList();
         }
         case 4 -> {
-          boolean bookIs = true;
-
-          for (Book book : bookMall) { // 쇼핑몰 책리스트 출력
-            book.bookPrint();
-          }
-          while (bookIs) { // false 나올때까지 반복
-            System.out.print("장바구니에 추가할 도서의 ID를 입력하세요");
-            inputId = sc.nextLine();
-
-            for (Book book : bookMall) {
-              if (inputId.equals(book.getBookId())) {
-                bookIs = false;
-                // 입력받은 book아이디랑 쇼핑몰 책 리스트에 같은이름이 있으면 이 if문에 들어오고 bookIs는 false가 되어서 for문 빠져나옴
-              }
-            }
-            if(bookIs) { // 같은 이름이 없으면 true 니까 if 실행 그리고 while 반복
-              System.out.println("목록에 그런 책이없습니다.");
-            }
-          }
-
-
-          System.out.print("장바구니에 추가하시겟습니까? Y|N"); //
-          inputTF = sc.nextLine();
-          if (inputTF.equals("Y")) {
-            for (Book book : bookMall) {
-              if (book.getBookId().equals(inputId)) {
-                cus1.addBookCart(book); // Y면 장바구니에 추가
-                System.out.println(book.getBookId() + " 도서가 장바구니에 추가되었습니다.");
-              }
-            }
-
-          } else if (inputTF.equals("N")) {
-            System.out.println("N입력");
-          } else {
-            System.out.println("다시해라 YN중에 해주세요");
-          }
+          orderService.serviceAddBook(bookMall);
         }
         case 8 -> {
           System.out.println("종료");
           System.exit(0);
+        }
+        case 9 -> {
+          admin.menuAdminLogin();
         }
         default -> {
           System.out.println("1부터 8까지 중에 입력하세요.");
