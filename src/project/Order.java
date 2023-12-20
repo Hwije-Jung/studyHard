@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Order {
-  static String adName = "홍길동";
-  static String adPhone = "1234";
+  static String adName = "홍길동"; // admin 이름
+  static String adPhone = "1234"; // admin 전화번호
 
   public void run() {
     Scanner sc = new Scanner(System.in);
@@ -52,23 +52,37 @@ public class Order {
 
       switch (choiceNum) {
         case 1 -> {
-          orderService.serviceCustomerPrint();
+          if (admin != null) {
+            System.out.println("관리자 입니다 다시 선택해주세요");
+          } else {
+            orderService.serviceCustomerPrint();
+          }
         }
         case 2 -> {
-          orderService.servicePrintCartList();
+          if (admin != null) {
+            System.out.println("관리자 입니다 다시 선택해주세요");
+          } else {
+            orderService.servicePrintCartList();
+          }
         }
         case 4 -> {
-          orderService.serviceAddBook(bookMall);
+          if (admin != null) {
+            System.out.println("관리자 입니다 다시 선택해주세요");
+          } else {
+            orderService.serviceAddBook(bookMall);
+          }
         }
         case 8 -> {
           System.out.println("종료");
           System.exit(0);
         }
         case 9 -> {
-          admin.menuAdminLogin();
-        }
-        default -> {
-          System.out.println("1부터 8까지 중에 입력하세요.");
+          if (admin != null) {
+            admin.menuAdminLogin();
+          } else {
+            System.out.println("관리자 권한이 없습니다. 다시 선택해주세요");
+          }
+
         }
       }
     }

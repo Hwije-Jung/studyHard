@@ -27,7 +27,4 @@ public class Person {
     return phone;
   }
 
-//  public String getAddress() {
-//    return address;
-//  }
 }
