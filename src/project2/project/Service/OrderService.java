@@ -1,18 +1,27 @@
-package project;
+package project2.project.Service;
+
+import Project_mall.vo.User;
+import project2.project.vo.Book;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class OrderService {
 
-  private User cus1;
-//  Book book = new Book();
+  private project2.project.vo.User cus1;
 
-  OrderService(User cus1){
+  BookService bookSer1 = new BookService();
 
+
+  public OrderService(project2.project.vo.User cus1) { // 생성자
     this.cus1 = cus1;
   }
-  public void printMenu(){
+
+  public OrderService(User user1) {
+  }
+
+
+  public void printMenu() {
     System.out.println();
     System.out.println("******************************");
     System.out.println("1. 고객 정보 확인하기");
@@ -24,21 +33,21 @@ public class OrderService {
     System.out.print("\n메뉴 번호를 선택해주세요 ");
   }
 
-  public void serviceCustomerPrint(){
+  public void serviceCustomerPrint() {
     System.out.println("고객 정보확인");
     cus1.printCustomerInform(); // 고객 이름, 전화번호 출력
   }
 
-  public void servicePrintCartList(){
+  public void servicePrintCartList() {
     System.out.println("장바구니 상품목록 보기");
-    if (!cus1.getBookCart().isEmpty()) { // 장바구니가 비어있지 않으면 장바구니 리스트 출력
-      cus1.printCartList();
+    if (!bookSer1.getBookCart().isEmpty()) { // 장바구니가 비어있지 않으면 장바구니 리스트 출력
+      bookSer1.printCartList();
     } else {
       System.out.println("장바구니가 비었습니다.");
     }
   }
 
-  public void serviceAddBook(ArrayList<Book> bookMall){
+  public void serviceAddBook(ArrayList<Book> bookMall) {
 
     Scanner sc = new Scanner(System.in);
 
@@ -72,7 +81,7 @@ public class OrderService {
     if (inputTF.equalsIgnoreCase("Y")) {
       for (Book book : bookMall) {
         if (book.getBookId().equals(inputId)) {
-          cus1.addBookCart(book); // Y면 장바구니에 추가
+          bookSer1.addBookCart(book); // Y면 장바구니에 추가
           System.out.println(book.getBookId() + " 도서가 장바구니에 추가되었습니다.");
         }
       }

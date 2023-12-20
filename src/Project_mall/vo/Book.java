@@ -1,4 +1,4 @@
-package project;
+package Project_mall.vo;
 
 public class Book {
   private String bookId;
@@ -19,13 +19,31 @@ public class Book {
     this.bookDate = bookDate;
   }
 
-  public void bookPrint (){
-    System.out.print(bookId+" | "+bookName+" | "+bookPrice+" | "+bookAuthor+" | "+bookSubName+" | "+bookCategory+" | "+bookDate+" | \n");
-  }
-
   public String getBookId() {
     return bookId;
   }
 
+  public String getBookName() {
+    return bookName;
+  }
 
+  public int getBookPrice() {
+    return bookPrice;
+  }
+
+  public String getBookAuthor() {
+    return bookAuthor;
+  }
+
+  public String getBookSubName() {
+    return bookSubName;
+  }
+
+  public String getBookCategory() {
+    return bookCategory;
+  }
+
+  public String getBookDate() {
+    return bookDate;
+  }
 }

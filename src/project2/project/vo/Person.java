@@ -1,4 +1,4 @@
-package project;
+package project2.project.vo;
 
 public class Person {
 
@@ -7,7 +7,7 @@ public class Person {
 
   private String address;
 
-  public Person(String name, String phone){
+  Person (String name, String phone){
     this.name = name;
     this.phone = phone;
   }
