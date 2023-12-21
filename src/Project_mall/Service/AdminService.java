@@ -22,7 +22,10 @@ public class AdminService {
     System.out.println("비밀번호 :");
     String adminPW = sc.next();
 
+    isAdmin(user,adminId,adminPW);
 
+  }
+  private void isAdmin(User user,String adminId,String adminPW){
     if (user.getId().equals(adminId) && user.getPassword().equals(adminPW)) {
       // 관리자 아이디가 맞으면 Admin 객체 생성
       Admin admin = new Admin(user);
@@ -33,4 +36,8 @@ public class AdminService {
       System.out.println("관리자 정보가 일치하지 않습니다.");
     }
   }
+
+
+
+
 }

@@ -32,7 +32,7 @@ public class BookService {
     }
   }
 
-  public void addBook(Book book) { // 장바구니에 Book 담기
+  public void addListBook(Book book) { // 장바구니에 Book 담기
 
     this.myCartBookList.add(book);
   }
@@ -44,7 +44,6 @@ public class BookService {
   public void cartAddBook() { // 장바구니에 Book 담기
 
     String inputId = "";  // 입력받는 책아이디
-    String inputTF;       // 장바구니 추가하겠습니까? Y|N
 
     boolean bookIs = true;
 
@@ -67,13 +66,18 @@ public class BookService {
       }
     }
 
+   askAddBook(bookList, inputId);
+  }
+
+  public void askAddBook(ArrayList<Book> bookList,String inputId){
+    String inputTF;       // 장바구니 추가하겠습니까? Y|N
 
     System.out.print("장바구니에 추가하시겟습니까? (Y|N) "); //
     inputTF = sc.nextLine();
     if (inputTF.equalsIgnoreCase("Y")) {
       for (Book book : bookList) {
         if (book.getBookId().equals(inputId)) {
-          addBook(book); // Y면 장바구니에 추가
+          addListBook(book); // Y면 장바구니에 추가
           System.out.println(book.getBookId() + " 도서가 장바구니에 추가되었습니다.");
         }
       }
