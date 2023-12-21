@@ -6,6 +6,8 @@ public class ShippingInfo {
     private String receiveerPhoneName;
     private String shippingAddress1;
     private String shippingAddress2;
+    private String shippingAddress3;
+
 
     ShippingInfo(){}
     public String getReceiverName() {
@@ -28,7 +30,6 @@ public class ShippingInfo {
         return shippingAddress3;
     }
 
-    private String shippingAddress3;
 
 
 
