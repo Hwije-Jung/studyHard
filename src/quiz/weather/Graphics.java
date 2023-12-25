@@ -1,4 +1,4 @@
 package quiz.weather;
 
-public class Dehumid {
+public class Graphics {
 }
