@@ -10,4 +10,8 @@ public abstract class AirConditioner extends Appliance{
     this.filter = filter;
     this.drainagePump = drainagePump;
   }
+
+  public AirConditioner(String airconType) {
+    super();
+  }
 }
