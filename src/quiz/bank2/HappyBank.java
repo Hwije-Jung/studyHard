@@ -17,4 +17,9 @@ public class HappyBank implements Bank {
     public void doEnterpriseFinance() {
         System.out.println(this.msg(this.getClass().getSimpleName(), Duty.ENTERPRISE_FINANCE));
     }
+
+    @Override
+    public void doPrivateBanking() {
+        //
+    }
 }

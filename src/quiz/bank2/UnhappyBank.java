@@ -7,7 +7,7 @@ package quiz.bank2;
  * date : 2023-12-27
  * description : 객체지향 원칙 인터페이스 분리 원칙(Interface Segregation Principle)
  */
-public class UnhappyBank implements Bank, PB {
+public class UnhappyBank implements Bank {
     @Override
     public void doPersonalFinance() {
         System.out.println(this.msg(this.getClass().getSimpleName(), Duty.PERSONAL_FINANCE));
