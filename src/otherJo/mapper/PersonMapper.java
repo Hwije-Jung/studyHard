@@ -1,6 +1,6 @@
 package otherJo.mapper;
 
-import otherJo.mapper.vo.Person;
+import otherJo.vo.Person;
 import java.util.HashMap;
 import java.util.Map;
 

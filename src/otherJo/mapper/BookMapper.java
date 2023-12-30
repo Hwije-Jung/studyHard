@@ -1,6 +1,6 @@
 package otherJo.mapper;
 
-import otherJo.mapper.vo.Book;
+import otherJo.vo.Book;
 
 import java.util.ArrayList;
 import java.util.HashMap;
