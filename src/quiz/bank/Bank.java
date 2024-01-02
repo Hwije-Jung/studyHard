@@ -1,4 +1,4 @@
-package quiz.bank2;
+package quiz.bank;
 
 /**
  * packageName : isp
