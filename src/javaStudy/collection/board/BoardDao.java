@@ -150,4 +150,5 @@ public class BoardDao {
     String currentDate = date.format(new Date());
     return currentDate;
   }
+
 }

@@ -6,15 +6,28 @@ public class Baekjoon_1748 {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
 
-    int n = sc.nextInt();
+    int num = sc.nextInt();
+    int length = 0;
+    int count = 0;
+    int total = 0;
+    int nine = 9;
 
-    for(int i=9 ;;i*=10 ){
-//      if(n<i)
+    int n = num;
+    while(n > 0){
+      n /=10;
+      length ++;
     }
 
-    // 1~9 -> 1*9
-    // 10~99 -> 2*90
-    // 100~999 -> 3*900
-    // 1000~ 9999 -> 4*9000
+
+    for(int i = 1 ; i< length; i++){
+      count = nine*i + count;
+      nine*=10;
+    }
+
+    int temp = (int)(Math.pow(10,length-1)-1);
+    total = (num-temp)*length + count;
+
+    System.out.println(total);
+
   }
 }
