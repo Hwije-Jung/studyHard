@@ -18,4 +18,9 @@ public class Student implements Comparable<Student>{
     return Integer.compare(this.id,o.id);
   }
 
+  //          return COMPARATOR.compare(this,o);
+//}
+//       public static final Comparator<Student> COMPARATOR =
+//        Comparator.comparingInt((Student stuTmp) -> stuTmp.id );//     과제1 두번째 방법
+
 }

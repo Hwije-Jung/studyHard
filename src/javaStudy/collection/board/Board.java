@@ -9,15 +9,10 @@ public class Board {
   private String bwriter;
   private String bdate;
 
+
   @Override
   public String toString() {
-    return "Board{" +
-            "bno=" + bno +
-            ", btitle='" + btitle + '\'' +
-            ", bcontent='" + bcontent + '\'' +
-            ", bwriter='" + bwriter + '\'' +
-            ", bdate=" + bdate +
-            '}';
+    return " 보드 오버라이딩 ~~";
   }
 
   public int getBno() {
