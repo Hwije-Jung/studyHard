@@ -16,6 +16,7 @@ public class Menue {
 	Scanner sc = new Scanner(System.in);
 
 	public Map<String, Address> addressBook = new HashMap<>();
+	//
 
 	AddressExceptionList error = new AddressExceptionList();
 	Menue() {
