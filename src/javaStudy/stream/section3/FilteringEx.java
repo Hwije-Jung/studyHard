@@ -2,6 +2,8 @@ package javaStudy.stream.section3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FilteringEx {
   public static void main(String[] args) {
@@ -21,6 +23,14 @@ public class FilteringEx {
     //3. 중복 요소 제거 해 봅시다.
     nameList.stream().distinct().forEach(System.out::println);
 
+    //4. "정"으로 시작하는 요소만 필터링
+    Stream<String> jungganae = nameList.stream().filter(name -> name.startsWith("정"));
+
+    //중복요소를 제거하고, "정으로 시작하는 요소만 필터링 하여 lastnamelist로 저장하세요
+    Stream<String> lastnameList = nameList.stream().filter(name -> name.startsWith("정")).distinct();
+
+    //lastnameList를 출력하세요.
+    lastnameList.forEach(System.out::println);
 
   }
 }
