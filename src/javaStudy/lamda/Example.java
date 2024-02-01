@@ -25,5 +25,7 @@ public class Example {
             (x,y)->Math.min(x,y)
     );
     System.out.println(min);
+
+ 
   }
 }
