@@ -1,9 +1,23 @@
 package boardProject.boardException;
 
+import boardProject.server.Server;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class BoardExceptionList {
+
+  private static volatile BoardExceptionList instance;
+  public static BoardExceptionList getInstance() {  //싱글톤
+    if (instance == null) {
+      synchronized (BoardExceptionList.class) {
+        if (instance == null) {
+          instance = new BoardExceptionList();
+        }
+      }
+    }
+    return instance;
+  }
   public static boolean isNumberSelect(String select) {
     String regex = "[1-9]"; // 1~9숫자만 입력
     Pattern p = Pattern.compile(regex);

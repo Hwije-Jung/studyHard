@@ -5,7 +5,7 @@ public class Board {
   private String btitle;
   private String bcontent;
   private String bwriter;
-  private String data;
+  private String date;
 
   public Board(){};
   public Board(int bno, String btitle, String bcontent, String bwriter, String data) {
@@ -13,7 +13,7 @@ public class Board {
     this.btitle = btitle;
     this.bcontent = bcontent;
     this.bwriter = bwriter;
-    this.data = data;
+    this.date = data;
   }
   public Board(String btitle, String bcontent, String bwriter) {
     this.btitle = btitle;
@@ -55,10 +55,10 @@ public class Board {
   }
 
   public String getData() {
-    return data;
+    return date;
   }
 
   public void setData(String data) {
-    this.data = data;
+    this.date = data;
   }
 }

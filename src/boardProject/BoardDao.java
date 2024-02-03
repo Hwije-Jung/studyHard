@@ -11,7 +11,7 @@ import java.util.*;
 public class BoardDao {
   Server server = Server.getInstance();
   Map<Integer, Board> boardMap = server.getBoardMap();
-  BoardExceptionList error = new BoardExceptionList(); // 예외처리 클래스 객체생성
+  BoardExceptionList error = BoardExceptionList.getInstance(); // 예외처리 클래스 객체생성
   Scanner sc = new Scanner(System.in);
 
   // 게시물 전체 출력

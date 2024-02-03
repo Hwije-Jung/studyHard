@@ -11,7 +11,7 @@ public class BoardMenu {
   Server server = Server.getInstance(); // 싱글톤
   BoardDao boardDao = new BoardDao();
   Scanner sc = new Scanner(System.in);
-  BoardExceptionList error = new BoardExceptionList();
+  BoardExceptionList error = BoardExceptionList.getInstance();
 
   public void printMenu() {
     System.out.println();
