@@ -1,4 +1,4 @@
-package boardProject;
+package boardProject_0;
 
 public class Board {
   private int bno;
@@ -14,7 +14,6 @@ public class Board {
     this.bwriter = bwriter;
     this.data = data;
   }
-
 
   public int getBno() {
     return bno;

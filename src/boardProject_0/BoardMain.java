@@ -1,9 +1,4 @@
-package boardProject;
-
-
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+package boardProject_0;
 
 public class BoardMain {
   public static void main(String[] args) {

@@ -26,18 +26,18 @@ public class MemoDao {
     return instance;
   }
 
-  public int getseq(){  // 현재 메모들의 고유번호 최대값 +1 반환
-    int maxNum=0;
-    if(memoList.isEmpty()){
+  public int getseq() {  // 현재 메모들의 고유번호 최대값 +1 반환
+    int maxNum = 0;
+    if (memoList.isEmpty()) {
       return 1;
     }
-    for(Memo memo : memoList){
+    for (Memo memo : memoList) {
       maxNum = memo.getNo();
     }
-    return maxNum+1;
+    return maxNum + 1;
   }
 
-  public void add (){
+  public void add() {
     System.out.println("★★작성자, 내용, 입력하세요★★");
     int no = getseq();
     System.out.println("==작성자 입력==");
@@ -56,15 +56,15 @@ public class MemoDao {
     System.out.println("==중요도 입력 (a~d)==");
     String priority = sc.nextLine();
 
-    Memo memo = new Memo(no,writer,content,date,priority);
+    Memo memo = new Memo(no, writer, content, date, priority);
     memoList.add(memo); // 리스트에 추가
   }
 
-  public void save(){ // 저장
-    try{
-      BufferedWriter bw = new BufferedWriter(new FileWriter("memo.dat",false));
+  public void save() { // 저장
+    try {
+      BufferedWriter bw = new BufferedWriter(new FileWriter("memo.dat", false));
 
-      for(Memo me : memoList) {
+      for (Memo me : memoList) {
         StringBuilder sb = new StringBuilder();
 
         sb.append(me.getNo()).append(",");
@@ -81,7 +81,7 @@ public class MemoDao {
       }
       bw.close();
       System.out.println("==저장하였습니다.==");
-    }catch(IOException io){
+    } catch (IOException io) {
       io.printStackTrace();
     }
 
@@ -96,9 +96,9 @@ public class MemoDao {
     return day;
   }
 
-  public void getMemo(int num){  // 특정 메모 읽기
-    for (Memo memo: memoList) {
-      if(memo.getNo() == num){
+  public void getMemo(int num) {  // 특정 메모 읽기
+    for (Memo memo : memoList) {
+      if (memo.getNo() == num) {
         System.out.print("\n메모번호 : ");
         System.out.println(memo.getNo());
         System.out.print("내용 : ****** \n");
@@ -106,9 +106,9 @@ public class MemoDao {
         String content = memo.getContent();
 
         String[] arr = content.split("\\\\n"); // 저장될때 \\n 으로 저장됨
-        arr[0] = arr[0].replace("\"","");
+        arr[0] = arr[0].replace("\"", "");
 //        System.out.println(arr[arr.length-1]);
-        for (int i = 0; i <arr.length-1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
           System.out.println(arr[i]);
         }
         System.out.println("******");
@@ -123,35 +123,35 @@ public class MemoDao {
     }
   }
 
-  public void part(int sNo){   // 메모의 content 일부만 보여주기
+  public void part(int sNo) {   // 메모의 content 일부만 보여주기
     int count = 0;  // 4단어까지 나오게 카운트 그 뒤는 .... 표시
-    for(Memo memo: memoList){
-      if(memo.getNo() == sNo){
+    for (Memo memo : memoList) {
+      if (memo.getNo() == sNo) {
         String contentStr = memo.getContent();
         StringTokenizer st = new StringTokenizer(contentStr, "\\n ");
 
-        while(st.hasMoreTokens()){
-          if(count++ == 4) {
+        while (st.hasMoreTokens()) {
+          if (count++ == 4) {
             System.out.print("....");
             break;
           }
-          System.out.print(" " +st.nextToken());
+          System.out.print(" " + st.nextToken());
         }
       }
     }
   }
 
-  public void list(){  // 메모 리스트
+  public void list() {  // 메모 리스트
     System.out.println("======================================================");
-    for(Memo memo : memoList){
-      System.out.print(memo.getNo()+" "+memo.getWriter()+" ");
+    for (Memo memo : memoList) {
+      System.out.print(memo.getNo() + " " + memo.getWriter() + " ");
       part(memo.getNo());
-      System.out.println(" \t"+memo.getDate()+" \t"+memo.getPriority());
+      System.out.println(" \t" + memo.getDate() + " \t" + memo.getPriority());
     }
     System.out.println("======================================================");
   }
 
-  public void delete(){  // 메모 삭제
+  public void delete() {  // 메모 삭제
     list();
     System.out.println("==삭제할 번호 입력하세요==");
     int deleteNum = Integer.parseInt(sc.nextLine());
@@ -159,10 +159,10 @@ public class MemoDao {
     System.out.println("==삭제 되었습니다.==");
   }
 
-  public void load(){  // 현재 파일에 저장된 메모 ArrayList에 넣기
-    try{
+  public void load() {  // 현재 파일에 저장된 메모 ArrayList에 넣기
+    try {
       BufferedReader br = new BufferedReader(new FileReader("memo.dat"));
-
+      //
       String str;
 
       // 파일에서 한 줄씩 읽어와 출력
@@ -170,22 +170,27 @@ public class MemoDao {
         str = br.readLine();  // 한 줄을 읽어와 변수에 저장
         if (str == null) break;  // 파일의 끝에 도달하면 루프를 종료
 
-        String[] arr = str.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)",-1);
+        String[] arr = str.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)", -1);
 
-        Memo memo = new Memo(Integer.parseInt(arr[0]),arr[1],arr[2],arr[3],arr[4]);
+        Memo memo = new Memo(Integer.parseInt(arr[0]), arr[1], arr[2], arr[3], arr[4]);
         memoList.add(memo);
       }
 
       br.close();
 
-    }catch (FileNotFoundException e){  // 파일없으면 잡아낼 필요없다.
+    } catch (FileNotFoundException e) {  // 파일없으면 잡아낼 필요없다.
+//      try {
+//        BufferedWriter bw = new BufferedWriter(new FileWriter("memo.dat", false));
+//
+//      } catch (Exception ex) {
+//        ex.printStackTrace();
+//      }
       e.printStackTrace();
-    }catch (IOException io){
+    } catch (IOException io) {
       io.printStackTrace();
     }
 
   }
-
 
 
 }
