@@ -3,11 +3,12 @@ package boardProject;
 import boardProject.boardException.BoardException;
 import boardProject.boardException.BoardExceptionList;
 import boardProject.boardException.ErrorCode;
+import boardProject.server.Server;
 
 import java.util.Scanner;
 
 public class BoardMenu {
-
+  Server server = Server.getInstance(); // 싱글톤
   BoardDao boardDao = new BoardDao();
   Scanner sc = new Scanner(System.in);
   BoardExceptionList error = new BoardExceptionList();
@@ -31,8 +32,6 @@ public class BoardMenu {
       String num = sc.nextLine();
       if (error.isNumberSelect(num)) {// 1~9까지 정규식검사
         throw new BoardException(ErrorCode.INVALID_INPUT_SELECT);
-        //BoardExeption 으로 throw
-
       }
 
       switch (num) {
@@ -42,6 +41,7 @@ public class BoardMenu {
             boardDao.addBoard();
           } else System.out.println("==추가하지 않습니다==");
         }
+
         case "2" -> { //게시물 읽기
           System.out.println("[게시물 읽기]");
           System.out.print("bno입력: ");
@@ -56,7 +56,6 @@ public class BoardMenu {
           System.out.println("1.Update | 2.Delete | 3.List");
           String inputNum = sc.nextLine();
 
-
           switch (inputNum) {
             case "1" -> boardDao.update(inputBno); //게시물 수정
             case "2" -> boardDao.delete(inputBno); //게시물 삭제
@@ -64,6 +63,7 @@ public class BoardMenu {
             default -> System.out.println("==잘못입력==");
           }
         }
+
         case "3" -> { //게시물 전체 삭제
           System.out.println("[게시물 전체 삭제]");
           System.out.println("---------------------------------");
@@ -74,9 +74,11 @@ public class BoardMenu {
             case "2" -> System.out.println("==전체삭제하기 취소==");
             default -> System.out.println("==잘못입력==");
           }
+
         }
         case "4" -> { //시스템 종료
           System.out.println("게시판 시스템이 종료합니다.");
+          server.disconnect();
           System.exit(0);
         }
         default -> { //다시입력
@@ -86,10 +88,6 @@ public class BoardMenu {
     } catch (Exception e) {
 
     }
-
-
     printMenu();
-
-
   }
 }

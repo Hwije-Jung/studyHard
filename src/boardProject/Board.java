@@ -7,12 +7,18 @@ public class Board {
   private String bwriter;
   private String data;
 
+  public Board(){};
   public Board(int bno, String btitle, String bcontent, String bwriter, String data) {
     this.bno = bno;
     this.btitle = btitle;
     this.bcontent = bcontent;
     this.bwriter = bwriter;
     this.data = data;
+  }
+  public Board(String btitle, String bcontent, String bwriter) {
+    this.btitle = btitle;
+    this.bcontent = bcontent;
+    this.bwriter = bwriter;
   }
 
 

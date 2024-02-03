@@ -3,21 +3,22 @@ package boardProject;
 import boardProject.boardException.BoardException;
 import boardProject.boardException.BoardExceptionList;
 import boardProject.boardException.ErrorCode;
+import boardProject.server.Server;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class BoardDao {
-  public Map<Integer, Board> boardMap = new HashMap<>(); // Board 해쉬맵
+  Server server = Server.getInstance();
+  Map<Integer, Board> boardMap = server.getBoardMap();
   BoardExceptionList error = new BoardExceptionList(); // 예외처리 클래스 객체생성
-
   Scanner sc = new Scanner(System.in);
-  static int i = 1; // 게시물 번호
 
   // 게시물 전체 출력
   public void listBoredsPrint() {
 
-    //순서가 필요함.
+    server.load(); // 해쉬맵 초기화
+
     Set<Integer> keyset = boardMap.keySet(); // boardMap의 키 Set으로 만듦
     Iterator<Integer> keIterator = keyset.iterator(); //그 키들의 Iterator 만듦
 
@@ -32,13 +33,6 @@ public class BoardDao {
     System.out.printf("%-6d%-12s%-16s%-20s\n", boardMap.get(key).getBno(), boardMap.get(key).getBwriter(), boardMap.get(key).getData(), boardMap.get(key).getBtitle());
   }
 
-  // 날짜 반환
-  public String getDate() {
-    SimpleDateFormat date = new SimpleDateFormat("yyyy-mm-dd");
-    String day = date.format(new Date());
-    return day;
-  }
-
   // 입력받은 게시물 번호가 존재하는지 검사
   public boolean isBoard(String inputBno){
     boolean isBoard = true;
@@ -50,7 +44,6 @@ public class BoardDao {
         return isBoard;
       }
     }
-
     return isBoard;
   }
 
@@ -63,8 +56,8 @@ public class BoardDao {
     System.out.print("작성자 입력: ");
     String writer = sc.nextLine();
 
-    Board newBoard = new Board(i++, title, content, writer, getDate());
-    boardMap.put(newBoard.getBno(), newBoard);
+    Board newBoard = new Board(title, content, writer);
+    server.insert(newBoard);
   }
 
   // 게시물 한 개 선택 후 정보 출력
@@ -106,14 +99,15 @@ public class BoardDao {
       }
       switch (select) {
         case "1" -> { // 수정할 게시물 1.OK 선택
-          Set<Integer> setKey = boardMap.keySet();
-          for (int key : setKey) {
-            if (boardMap.get(key).getBno() == Integer.parseInt(inputBno)) {
-              boardMap.get(key).setBtitle(title);
-              boardMap.get(key).setBcontent(content);
-              boardMap.get(key).setBwriter(writer);
-            }
-          }
+          server.update(inputBno, title, content, writer);
+//          Set<Integer> setKey = boardMap.keySet();
+//          for (int key : setKey) {
+//            if (boardMap.get(key).getBno() == Integer.parseInt(inputBno)) {
+//              boardMap.get(key).setBtitle(title);
+//              boardMap.get(key).setBcontent(content);
+//              boardMap.get(key).setBwriter(writer);
+//            }
+//          }
           System.out.println("==수정 완료==");
         }
         case "2" -> {
@@ -135,6 +129,7 @@ public class BoardDao {
         if (boardMap.get(key).getBno() == Integer.parseInt(inputBno)) {
           boardMap.remove(key);
           cnt++;
+          server.delete(inputBno);
           System.out.println("==삭제되었습니다==\n");
         }
       }
@@ -144,12 +139,13 @@ public class BoardDao {
     } catch (Exception e) {
 //      e.printStackTrace();
     }
-
   }
 
   // 게시물 전체 삭제
   public void clear() {
     boardMap.clear();
+    server.allDelete();
+
     System.out.println("==전체삭제되었습니다==");
   }
 
